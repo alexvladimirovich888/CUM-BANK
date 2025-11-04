@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUM BANK - Invest in the future</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/KjL7sbm7/ADS-8.png">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .twitter-btn {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+        }
+
+        .twitter-btn:hover {
+            background: #333333;
+            transform: scale(1.05);
+        }
+
+        .twitter-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .container {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-family: 'Arial Black', 'Helvetica', sans-serif;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0.8;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 6rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: 2px solid #000000;
+            background: transparent;
+            color: #000000;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 6rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            fill: #000000;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            margin-top: auto;
+            padding-top: 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 10% auto;
+            padding: 2rem;
+            border: none;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header class="header"><img src="https://i.postimg.cc/KjL7sbm7/ADS-8.png" alt="SUM BANK Logo" class="header-logo" onerror="this.style.display='none'; this.alt='Logo failed to load';"> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="twitter-btn" title="Follow us on Twitter">
+    <svg class="twitter-icon" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg></a>
+  </header>
+  <main class="container">
+   <h1 class="logo" id="brand-name">SUM BANK</h1>
+   <p class="tagline" id="tagline">Invest in the future — literally.</p>
+   <div class="buttons"><button class="btn btn-primary" id="primary-btn">Learn more</button> <a href="https://pump.fun" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="secondary-btn">Deposit</a>
+   </div><!-- Modal -->
+   <div id="learnMoreModal" class="modal">
+    <div class="modal-content"><span class="close">×</span>
+     <h2>About SUM BANK</h2>
+     <p><strong>SUM BANK</strong> represents the future of decentralized finance, where traditional banking meets cutting-edge blockchain technology.</p>
+     <p>Our platform enables users to participate in the new economy through secure, transparent, and innovative financial instruments. By leveraging smart contracts and decentralized protocols, we're building a financial system that's accessible to everyone.</p>
+     <p>Join us in revolutionizing how value is stored, transferred, and grown in the digital age. The future of finance is here, and it's decentralized.</p>
+    </div>
+   </div>
+   <section class="features">
+    <div class="feature">
+     <svg class="feature-icon" viewbox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none" /> <path d="M7 8h10M7 12h6" stroke="currentColor" stroke-width="2" />
+     </svg>
+     <h3 class="feature-title" id="feature-one">Secure Transactions</h3>
+    </div>
+    <div class="feature">
+     <svg class="feature-icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none" /> <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" />
+     </svg>
+     <h3 class="feature-title" id="feature-two">Future-Ready Platform</h3>
+    </div>
+    <div class="feature">
+     <svg class="feature-icon" viewbox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" fill="none" />
+     </svg>
+     <h3 class="feature-title" id="feature-three">Instant Processing</h3>
+    </div>
+   </section>
+   <footer class="footer">
+    <p>© 2024 SUM BANK. All rights reserved.</p>
+   </footer>
+  </main>
+  <script>
+        const defaultConfig = {
+            brand_name: "SUM BANK",
+            tagline: "Invest in the future — literally.",
+            primary_button: "Learn more",
+            secondary_button: "Deposit",
+            feature_one: "Secure Transactions",
+            feature_two: "Future-Ready Platform",
+            feature_three: "Instant Processing",
+            background_color: "#ffffff",
+            text_color: "#000000"
+        };
+
+        let config = { ...defaultConfig };
+
+        async function onConfigChange(newConfig) {
+            config = { ...config, ...newConfig };
+            
+            // Update text content
+            document.getElementById('brand-name').textContent = config.brand_name || defaultConfig.brand_name;
+            document.getElementById('tagline').textContent = config.tagline || defaultConfig.tagline;
+            document.getElementById('primary-btn').textContent = config.primary_button || defaultConfig.primary_button;
+            document.getElementById('secondary-btn').textContent = config.secondary_button || defaultConfig.secondary_button;
+            document.getElementById('feature-one').textContent = config.feature_one || defaultConfig.feature_one;
+            document.getElementById('feature-two').textContent = config.feature_two || defaultConfig.feature_two;
+            document.getElementById('feature-three').textContent = config.feature_three || defaultConfig.feature_three;
+            
+            // Update colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            
+            document.body.style.backgroundColor = backgroundColor;
+            document.body.style.color = textColor;
+            
+            // Update header background
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.backgroundColor = `${backgroundColor}f2`; // Add transparency
+                header.style.borderBottomColor = `${textColor}1a`; // Add transparency to border
+            }
+            
+            // Update Twitter button colors
+            const twitterBtn = document.querySelector('.twitter-btn');
+            if (twitterBtn) {
+                twitterBtn.style.backgroundColor = textColor;
+                twitterBtn.style.color = backgroundColor;
+            }
+
+            // Update modal colors
+            const modalContent = document.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.style.backgroundColor = backgroundColor;
+                modalContent.style.color = textColor;
+            }
+            
+            // Update button colors
+            const primaryBtn = document.getElementById('primary-btn');
+            const secondaryBtn = document.getElementById('secondary-btn');
+            
+            primaryBtn.style.backgroundColor = textColor;
+            primaryBtn.style.color = backgroundColor;
+            primaryBtn.style.borderColor = textColor;
+            
+            secondaryBtn.style.backgroundColor = 'transparent';
+            secondaryBtn.style.color = textColor;
+            secondaryBtn.style.borderColor = textColor;
+            
+            // Update SVG colors
+            const icons = document.querySelectorAll('.feature-icon');
+            icons.forEach(icon => {
+                icon.style.fill = textColor;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["brand_name", config.brand_name || defaultConfig.brand_name],
+                ["tagline", config.tagline || defaultConfig.tagline],
+                ["primary_button", config.primary_button || defaultConfig.primary_button],
+                ["secondary_button", config.secondary_button || defaultConfig.secondary_button],
+                ["feature_one", config.feature_one || defaultConfig.feature_one],
+                ["feature_two", config.feature_two || defaultConfig.feature_two],
+                ["feature_three", config.feature_three || defaultConfig.feature_three]
+            ]);
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('learnMoreModal');
+        const primaryBtn = document.getElementById('primary-btn');
+        const closeBtn = document.querySelector('.close');
+
+        // Open modal when Learn More is clicked
+        primaryBtn.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+                modal.style.display = 'block';
+            }, 150);
+        });
+
+        // Close modal when X is clicked
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Deposit button click effect (now handled by the link)
+        document.getElementById('secondary-btn').addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        // Initialize SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9995e8cac782c137',t:'MTc2MjI3ODE2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
